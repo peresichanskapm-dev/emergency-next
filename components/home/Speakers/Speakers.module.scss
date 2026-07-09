@@ -1,0 +1,179 @@
+/* "Спікери" — dark section, 3-up grid of polaroid speaker cards.
+   The polaroid frame + rounded corners + empty caption area are baked into
+   each PNG; we only overlay the name + role onto the white footer. */
+
+@use "../../../app/styles/mixins" as m;
+
+.speakers {
+	@include m.dark-grain;
+	padding: 10rem 0;
+
+	@media (min-width: 992px) {
+		padding: 13rem 0;
+	}
+}
+
+.inner {
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.heading {
+	font-family: var(--font-primary);
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.8rem;
+	line-height: 1.1;
+	letter-spacing: 0.15em;
+	color: #fff;
+
+	@media (min-width: 992px) {
+		font-size: 2.4rem;
+	}
+}
+
+/* ---------- Mobile slider viewport (static grid from 768px) ---------- */
+.viewport {
+	margin-top: 4rem;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* snap only where touch is the primary input */
+	@media (pointer: coarse) {
+		scroll-snap-type: x mandatory;
+	}
+	@media (min-width: 768px) {
+		overflow: visible;
+	}
+	@media (min-width: 992px) {
+		margin-top: 6rem;
+	}
+}
+
+.grid {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	gap: 2rem;
+	width: max-content;
+	/* align the first card with the .inner content edge */
+	padding-inline: max(2rem, calc(50vw - 62rem));
+
+	@media (min-width: 768px) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3.2rem;
+		width: auto;
+	}
+	@media (min-width: 992px) {
+		grid-template-columns: repeat(3, 1fr); /* Figma: 3 cols, gap 32 */
+	}
+}
+
+/* ---------- Card = the framed image + a caption over its footer ---------- */
+.card {
+	position: relative;
+	/* mobile slider: one near-full-width polaroid per swipe (mockup: 335/375) */
+	flex: 0 0 30rem;
+	scroll-snap-align: center;
+
+	@media (min-width: 768px) {
+		flex: none;
+	}
+}
+
+.cardImg {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Newsprint over the card: multiply shows it on the white frame/footer and
+   leaves the dark photo (and transparent corners) untouched. The baked-in
+   texture was too faint. Lower opacity for subtler. */
+.card::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background: url("/img/topics/newsprint.png") center / cover no-repeat;
+	mix-blend-mode: multiply;
+	opacity: 0.85;
+	border-radius: 1.4rem;
+	pointer-events: none;
+}
+.card:nth-child(2)::after {
+	background-position: 70% top;
+}
+.card:nth-child(3)::after {
+	background-position: 25% bottom;
+}
+
+/* Name + role sit on the baked white footer: measured photo ends at 78% of
+   the image height, footer is the bottom 22% (397×492 template). Anchored a
+   hair below that edge so the name hugs the photo like the mockup. */
+.caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 79%;
+	z-index: 2; /* above the newsprint overlay */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 1.6rem;
+	text-align: center;
+}
+
+.name {
+	margin: 0;
+	font-family: var(--font-typewriter);
+	font-weight: 400;
+	font-size: 1.8rem;
+	line-height: 1.15;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: var(--color-text);
+
+	@media (min-width: 992px) {
+		font-size: 2rem;
+	}
+}
+
+.role {
+	margin: 0.8rem 0 0;
+	max-width: 30rem;
+	font-family: var(--font-primary);
+	font-size: 1.4rem;
+	line-height: 1.3;
+}
+
+/* ---------- Progress line (mobile slider only) ---------- */
+.container {
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+
+	@media (min-width: 768px) {
+		display: none;
+	}
+}
+
+.progress {
+	margin-top: 3.6rem;
+	height: 2px;
+	background-color: rgba(255, 255, 255, 0.25);
+}
+
+.progressFill {
+	height: 100%;
+	background-color: #fff;
+}

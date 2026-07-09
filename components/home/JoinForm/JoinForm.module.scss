@@ -1,0 +1,124 @@
+@use "../../../app/styles/mixins" as m;
+
+.section {
+  background-color: #000;
+  /* На мобільному залишаємо падінги зверху і знизу */
+  padding: 4rem 0;
+
+  @media (min-width: 992px) {
+    /* Прибираємо падінги, дозволяючи картинці займати максимум висоти */
+    padding: 0;
+  }
+}
+
+.inner {
+  width: 100%; /* Розтягуємо контейнер на всю ширину екрана */
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr; /* Ділимо екран рівно навпіл 50/50 */
+    align-items: center; /* Центруємо форму по вертикалі відносно картинки */
+  }
+}
+
+/* ---------- Зображення ---------- */
+.imageWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* mobile mockup: form first, poster image below it */
+  order: 2;
+
+  @media (min-width: 992px) {
+    order: 0;
+    /* 200% від 50%-колонки = 100% екрана — картинка бере всю ширину сторінки */
+    width: 200%;
+    /* Притискаємо до лівого краю */
+    justify-content: flex-start;
+  }
+}
+
+.image {
+  width: 90%; /* Картинка заповнює всю ліву половину екрана */
+  height: auto;
+  display: block;
+  /* Не ставимо max-width, щоб вона була великою і зливалася з фоном, як на макеті */
+}
+
+/* ---------- Форма ---------- */
+.formWrapper {
+  width: 100%;
+  max-width: 68rem; /* Збільшено ширину, щоб заголовок гарантовано став в 1 рядок */
+  padding: 4rem 2rem;
+  margin: 0 auto;
+
+  @media (min-width: 992px) {
+    padding: 6rem 4rem 6rem 6rem; /* Даємо відступ від картинки (6rem) */
+    margin: 0; /* Вирівнюємо форму лівіше всередині своєї (правої) колонки */
+  }
+}
+
+.heading {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  color: #fff;
+  margin-bottom: 4rem;
+  text-align: center;
+
+  @media (min-width: 992px) {
+    font-size: 2.8rem;
+    text-align: left;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.input {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem 2.4rem;
+  color: #fff;
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.05em;
+  }
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.submitBtn {
+  margin-top: 1.4rem;
+  width: 100%;
+  background-color: #f2f2f2;
+  color: #111;
+  border: none;
+  padding: 2.2rem;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #fff;
+  }
+}

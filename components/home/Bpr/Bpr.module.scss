@@ -1,0 +1,121 @@
+@use "../../../app/styles/mixins" as m;
+
+.bpr {
+  /* Світлий фон секції */
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 992px) {
+    padding: 12rem 0;
+  }
+
+  /* Текстура зліва (газетний край) */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 25rem; /* Приблизна ширина текстури */
+    background: url("/img/bpr/texture-left.png") left center / cover no-repeat;
+    mix-blend-mode: multiply;
+    opacity: 0.6; /* Відрегулюй прозорість за потреби */
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 128rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+    align-items: center; /* Центрування по вертикалі відносно тексту */
+    gap: 8rem;
+  }
+}
+
+/* ---------- Зображення ---------- */
+.imageWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* mobile mockup: text block goes first, certificate below it */
+  order: 2;
+
+  @media (min-width: 992px) {
+    order: 0;
+    justify-content: flex-end;
+  }
+}
+
+.certificateImg {
+  max-width: 100%;
+  height: auto;
+  /* Якщо нахил не закладений у самому PNG, розкоментуй рядок нижче: */
+  /* transform: rotate(-5deg); */
+}
+
+/* ---------- Контент ---------- */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 58rem; /* Обмежує ширину тексту, як на макеті */
+}
+
+.heading {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  letter-spacing: 0.15em;
+  color: var(--color-text, #211f20);
+  margin-bottom: 3rem;
+
+  @media (min-width: 992px) {
+    font-size: 2.4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+.highlight {
+  font-family: var(--font-primary);
+  font-weight: 600; /* Напівжирний шрифт для першого абзацу */
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--color-text, #211f20);
+  margin-bottom: 2.4rem;
+
+  @media (min-width: 992px) {
+    font-size: 1.8rem;
+  }
+}
+
+.redText {
+  color: var(--color-red);
+}
+
+.desc {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: rgba(33, 31, 32, 0.7); /* Трохи приглушений колір для другого абзацу */
+
+  @media (min-width: 992px) {
+    font-size: 1.8rem;
+  }
+}

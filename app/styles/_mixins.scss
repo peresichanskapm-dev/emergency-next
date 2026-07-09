@@ -1,0 +1,14 @@
+// Shared SCSS mixins.
+
+// Grungy grain on the dark (noir) section backgrounds. The texture PNG is
+// fairly strong, so a translucent black veil dampens it toward the Figma
+// "paper texture" ~40-50%. Raise $veil (→1) for subtler, lower for stronger.
+@mixin dark-grain($veil: 0.5) {
+	background-color: var(--color-black);
+	background-image:
+		linear-gradient(rgba(0, 0, 0, $veil), rgba(0, 0, 0, $veil)),
+		url("/img/common/dark-texture.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}

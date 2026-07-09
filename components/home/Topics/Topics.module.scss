@@ -1,0 +1,222 @@
+/* "Ключові теми прекурсу" — dark section with a horizontally scrollable row
+   of folder-shaped cards and a progress line.
+   Figma (1440 frame): heading 24/110 at y≈2482; cards W540 H235 top y2670
+   (tab notch y2648), gap 40, row starts at container edge; images overhang
+   the card tops (clipboard on 01, ultrasound on 02, 03 bare); progress line
+   at y2965 (cards bottom 2905 + 60). */
+
+@use "../../../app/styles/mixins" as m;
+
+.topics {
+	@include m.dark-grain;
+	/* ticker row bottom y2297 → heading top y2482 */
+	padding: 12rem 0 0;
+
+	@media (min-width: 992px) {
+		padding-top: 18.5rem;
+	}
+}
+
+.heading {
+	font-family: var(--font-primary);
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.8rem;
+	line-height: 1.1;
+	letter-spacing: 0.15em;
+	color: #fff;
+
+	@media (min-width: 992px) {
+		font-size: 2.4rem;
+	}
+}
+
+/* ---------- Carousel ---------- */
+.viewport {
+	overflow-x: auto;
+	/* headroom for the images poking above the cards;
+	   heading box bottom y2508 → tab top y2648 = 14rem on desktop */
+	padding-top: 10rem;
+	cursor: grab;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	&:active {
+		cursor: grabbing;
+	}
+
+	/* snap only where touch is the primary input — mouse drag scrolls freely */
+	@media (pointer: coarse) {
+		scroll-snap-type: x mandatory;
+	}
+	@media (min-width: 992px) {
+		padding-top: 14rem;
+	}
+}
+
+.track {
+	display: flex;
+	gap: 2rem;
+	width: max-content;
+	/* align the first card with the .container content edge */
+	padding-inline: max(2rem, calc(50vw - 62rem));
+
+	@media (min-width: 992px) {
+		gap: 4rem; /* Figma: 40px between cards */
+	}
+}
+
+/* ---------- Folder card ---------- */
+.card {
+	position: relative;
+	flex: 0 0 auto;
+	width: 33.5rem; /* Figma mobile: 335 */
+	min-height: 31.4rem; /* Figma mobile: 314 */
+	/* white card + faint newsprint texture. The top white gradient is a veil
+	   that fades the texture — raise its alpha (→1) for subtler, lower for
+	   stronger. Texture layer sits under it, over the #fff base. */
+	background-color: #fff;
+	/* mobile: near-square crop of the scan lands on a faint area — ease the
+	   veil so the newsprint reads like the mockup; desktop keeps 0.74 */
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.58)),
+		url("/img/topics/newsprint.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	@media (min-width: 992px) {
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.74)),
+			url("/img/topics/newsprint.png");
+	}
+	border-radius: 1.6rem;
+	padding: 2.8rem 2.4rem;
+	scroll-snap-align: start;
+	scroll-margin-inline-start: max(2rem, calc(50vw - 62rem));
+
+	/* folder tab on the top edge, slanted right side */
+	&::before {
+		content: "";
+		position: absolute;
+		top: -2.1rem;
+		left: 0;
+		width: 52%;
+		height: 4rem;
+		background-color: #fff;
+		border-radius: 1rem 0 0 0;
+		clip-path: polygon(0 0, calc(100% - 2.2rem) 0, 100% 100%, 0 100%);
+	}
+
+	@media (min-width: 992px) {
+		width: 54rem; /* Figma: 540 */
+		min-height: 23.5rem; /* Figma: 235 */
+		padding: 4.4rem 3rem 3rem;
+	}
+}
+
+/* offset the texture crop so the cards don't look like the same scan */
+.card:nth-child(2) {
+	background-position: 68% top;
+}
+.card:nth-child(3) {
+	background-position: 25% bottom;
+}
+
+.num {
+	display: block;
+	font-family: var(--font-typewriter);
+	font-size: 2.4rem;
+	line-height: 1;
+	color: var(--color-text);
+
+	@media (min-width: 992px) {
+		font-size: 3.2rem;
+	}
+}
+
+.title {
+	margin-top: 8rem; /* mobile: leaves room for the big image on the right */
+	font-family: var(--font-typewriter);
+	font-weight: 400;
+	font-size: 2.4rem;
+	line-height: 1.1;
+	text-transform: uppercase;
+	color: var(--color-text);
+
+	@media (min-width: 992px) {
+		margin-top: 3rem;
+		font-size: 2.8rem;
+	}
+}
+
+.desc {
+	margin-top: 2rem;
+	max-width: 36rem;
+	font-family: var(--font-primary);
+	font-size: 1.6rem;
+	line-height: 1.3;
+	color: rgba(33, 31, 32, 0.6);
+
+	@media (min-width: 992px) {
+		margin-top: 2.6rem;
+		font-size: 1.8rem;
+	}
+}
+
+/* ---------- Overhanging evidence icons — ONE automatic style for every card.
+   A fixed square box + object-fit lets icons of any aspect ratio share the
+   same footprint and sit centred on the card's top-right edge, so adding a
+   new topic needs no per-image CSS. */
+.img {
+	position: absolute;
+	top: -5.5rem; /* box is centred on the card top edge → icon half-overhangs */
+	right: 1.2rem;
+	width: 15rem;
+	height: 15rem;
+	object-fit: contain;
+	object-position: right center;
+	pointer-events: none;
+	user-select: none;
+
+	@media (min-width: 992px) {
+		top: -7.5rem;
+		right: 2.4rem;
+		width: 15rem;
+		height: 15rem;
+	}
+}
+
+/* subtle scrapbook tilt, alternating — still fully automatic (no per-card CSS) */
+.card:nth-child(odd) .img {
+	transform: rotate(6deg);
+}
+.card:nth-child(even) .img {
+	transform: rotate(-6deg);
+}
+
+/* ---------- Progress line ---------- */
+.container {
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.progress {
+	margin-top: 4.4rem;
+	height: 2px;
+	background-color: rgba(255, 255, 255, 0.25);
+
+	@media (min-width: 992px) {
+		margin-top: 6rem; /* cards bottom y2905 → line y2965 */
+	}
+}
+
+.progressFill {
+	height: 100%;
+	background-color: #fff;
+}

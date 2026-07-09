@@ -1,0 +1,16 @@
+@use './styles/fonts';
+@use './styles/vars';
+@use './styles/reset';
+@use './styles/typography';
+
+body {
+	background-color: var(--color-bg);
+	color: var(--color-text);
+}
+
+.container {
+	width: 100%;
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}

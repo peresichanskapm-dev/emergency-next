@@ -1,0 +1,104 @@
+/* "Для кого цей прекурс" — light section: torn dark edge from Program above,
+   heading, and a running ticker of audience categories.
+   Figma (1440): heading 24/110 ≈ y5715; ticker row ≈ y5788, B52 16, dark
+   dividers; section is light (var(--color-light)). */
+
+.forAudience {
+	position: relative;
+	background-color: var(--color-light);
+	padding: 9rem 0 6rem;
+	overflow: hidden; /* clip the ticker overflow */
+
+	@media (min-width: 992px) {
+		padding: 11rem 0 7rem;
+	}
+}
+
+/* Torn dark strip sitting on the seam with the dark section above */
+.tornTop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	transform: translateY(-50%);
+	z-index: 2;
+	pointer-events: none;
+	user-select: none;
+}
+
+.inner {
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.heading {
+	font-family: var(--font-primary);
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.8rem;
+	line-height: 1.1;
+	letter-spacing: 0.15em;
+	color: var(--color-text);
+
+	@media (min-width: 992px) {
+		font-size: 2.4rem;
+	}
+}
+
+/* ---------- Running ticker ---------- */
+.marquee {
+	margin-top: 4.4rem;
+	overflow: hidden;
+	width: 100%;
+
+	@media (min-width: 992px) {
+		margin-top: 5rem;
+	}
+}
+
+.track {
+	display: flex;
+	width: max-content;
+	animation: marquee-audience 40s linear infinite;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.sep {
+	flex-shrink: 0;
+	width: 1px;
+	height: 2.4rem;
+	background-color: rgba(33, 31, 32, 0.3);
+}
+
+.item {
+	margin: 0 6rem 0 2rem;
+	font-family: var(--font-typewriter);
+	font-size: 1.6rem;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: var(--color-text);
+}
+
+@keyframes marquee-audience {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.track {
+		animation: none;
+	}
+}

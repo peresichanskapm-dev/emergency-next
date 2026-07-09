@@ -1,0 +1,283 @@
+@use "../../../app/styles/mixins" as m;
+
+.about {
+	position: relative;
+	@include m.dark-grain;
+	/* clip horizontally (no h-scroll from photos) but let the flyer overhang up */
+	overflow-x: clip;
+	padding-bottom: 6rem;
+
+	@media (min-width: 992px) {
+		padding-bottom: 12rem;
+	}
+}
+
+/* Torn white paper edge at the top seam (white section above → dark) */
+.tornTop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	/* Lift the strip so its centre sits on the section seam */
+	transform: translateY(-50%);
+	z-index: 2;
+	pointer-events: none;
+	user-select: none;
+}
+
+.inner {
+	position: relative;
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 8rem 2rem 0;
+
+	@media (min-width: 992px) {
+		padding: 10rem 2rem 0;
+	}
+}
+
+/* ---------- Evidence photos (decorative) ----------
+   Anchored to the dossier card (their common containing block).
+   Tilt + white border are baked into each PNG (asset px size = its rotated
+   bounding box), so we NEVER rotate in CSS — just place the bounding box.
+   Desktop offsets are exact from Figma (frame 1440, card top-left 107/1430,
+   card right 1347); design px ÷ 10 = rem. */
+.photo {
+	position: absolute;
+	display: block;
+	height: auto;
+	/* No shadow — per Figma the photos have only a white stroke, which is
+	   baked into the PNGs (asset px size = the node's rotated AABB). */
+	user-select: none;
+	pointer-events: none;
+}
+
+/* Top "COMING SOON" flyer — child of .cardStack, sandwiched between the two
+   panels: above .cardBack (z1), below the front .card (z3). */
+.photoFlyer {
+	z-index: 2;
+	width: 20rem;
+	top: -14rem;
+	right: 0.5rem;
+
+	@media (min-width: 768px) {
+		width: 30rem;
+		top: -20rem;
+	}
+	@media (min-width: 992px) {
+		width: 42.4rem; /* AABB 423×498 */
+		top: -29.22rem; /* Figma: AABB top 1137.8 − front-panel top 1430 */
+		right: 5.3rem; /* card right 1347 − AABB right 1294 */
+	}
+}
+
+/* Lower detective photo — card top-right, overhanging the right edge */
+.photoDetective {
+	z-index: 3;
+	width: 12rem;
+	top: 1rem;
+	right: -1rem;
+
+	@media (min-width: 768px) {
+		width: 16rem;
+	}
+	@media (min-width: 992px) {
+		width: 23rem; /* AABB 230×264 */
+		top: 1.2rem; /* AABB top 1441.7 − card top 1430 */
+		right: -2.9rem; /* extends 29px past card right */
+	}
+}
+
+/* Binder clip — pinned to the detective photo's top-right corner */
+.clip {
+	position: absolute;
+	z-index: 5;
+	display: block;
+	height: auto;
+	width: 7rem;
+	top: 0.5rem;
+	right: -4rem;
+	user-select: none;
+	pointer-events: none;
+
+	@media (min-width: 768px) {
+		width: 9rem;
+	}
+	@media (min-width: 992px) {
+		width: 14rem; /* AABB 140×155 */
+		top: 0.5rem; /* AABB top 1435.4 − card top 1430 */
+		right: -9.3rem; /* reaches the frame's right edge (1440) */
+	}
+}
+
+/* ---------- Dossier — two-panel manila folder ---------- */
+.cardStack {
+	position: relative;
+	z-index: 3; /* whole folder in front of the flyer (z2 in .inner) */
+	margin-top: 8rem;
+
+	@media (min-width: 992px) {
+		margin-top: 13rem;
+	}
+}
+
+/* Back panel — peeks above the front (carries the tab) and stops short of the
+   front's bottom, so the front pocket peeks out below.
+   Figma: back Y1430.93 H512 vs front Y1486.56 H534 → 55.6px up / 77.6px short. */
+.cardBack {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: -3rem;
+	bottom: 4rem;
+	background-color: #fff;
+	border-radius: 1.6rem;
+
+	@media (min-width: 992px) {
+		top: -5.56rem;
+		bottom: 7.76rem;
+		border-radius: 2rem;
+	}
+}
+
+/* Front pocket — holds the content */
+.card {
+	position: relative;
+	z-index: 3; /* above the back panel (z1) and the flyer (z2) */
+	background-color: #fff;
+	border-radius: 1.6rem;
+	padding: 5rem 2.4rem 4rem;
+	/* soft lift + faint top seam so it reads as a panel over the back one */
+	box-shadow: 0 -0.3rem 0.8rem rgba(0, 0, 0, 0.05),
+		0 0.8rem 2.4rem rgba(0, 0, 0, 0.12);
+
+	@media (min-width: 768px) {
+		padding: 6rem 4rem 5rem;
+	}
+	@media (min-width: 992px) {
+		border-radius: 2rem;
+		padding: 7rem 6rem 6rem;
+	}
+}
+
+/* Folder tab — sits on the back panel's top edge (child of .cardStack) */
+.tab {
+	position: absolute;
+	z-index: 4; /* above both panels and the flyer */
+	top: -5rem;
+	left: 2.4rem;
+	padding: 0.8rem 2.4rem;
+	background-color: #fff;
+	border-radius: 1rem 1rem 0 0;
+	font-family: var(--font-typewriter);
+	font-size: 1.4rem;
+	letter-spacing: 0.05em;
+	color: var(--color-text);
+	white-space: nowrap;
+
+	@media (min-width: 992px) {
+		top: -8.66rem; /* 86.6px above the front panel = ~30px above the back panel */
+		left: 4rem;
+		padding: 1rem 3rem;
+		font-size: 1.6rem;
+	}
+}
+
+/* Typewriter intro — Figma: B52 20px / line-height 100% / letter-spacing 0% */
+.intro {
+	max-width: 59rem;
+	font-family: var(--font-typewriter);
+	font-size: 1.6rem;
+	line-height: 1.3;
+	letter-spacing: 0;
+	color: var(--color-text);
+
+	@media (min-width: 992px) {
+		font-size: 2rem;
+		line-height: 1;
+	}
+}
+
+/* Big statement heading — Figma: Steppe Medium 24px / LH 130% / letter-spacing 15% */
+.heading {
+	position: relative;
+	z-index: 2;
+	margin-top: 3.6rem;
+	max-width: 62rem;
+	font-family: var(--font-primary);
+	font-weight: 500;
+	text-transform: uppercase;
+	font-size: 2rem;
+	line-height: 1.3;
+	letter-spacing: 0.15em;
+	color: var(--color-text);
+
+	@media (min-width: 768px) {
+		font-size: 2.2rem;
+	}
+	@media (min-width: 992px) {
+		margin-top: 4.4rem;
+		max-width: 82rem;
+		font-size: 2.4rem;
+	}
+}
+
+/* Hand-drawn red ellipse around a phrase */
+.circled {
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	letter-spacing: 0.02em;
+
+	@media (min-width: 400px) {
+		letter-spacing: 0.15em;
+	}
+}
+
+.circled::after {
+	content: "";
+	position: absolute;
+	left: -0.5em;
+	right: -0.5em;
+	top: -0.14em;
+	bottom: -0.14em;
+	background: url("/img/about/ellipse-red.png") center / 100% 100% no-repeat;
+	pointer-events: none;
+}
+
+/* Feature columns */
+.features {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 3.2rem;
+	margin-top: 4rem;
+	max-width: 56rem;
+
+	@media (min-width: 992px) {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 5.3rem;
+		margin-top: 6rem;
+		max-width: none;
+	}
+}
+
+.feature {
+	display: flex;
+	gap: 1.2rem;
+}
+
+.plus {
+	flex-shrink: 0;
+	width: 1.3rem;
+	height: 1.3rem;
+	margin-top: 0.4rem;
+}
+
+.featureText {
+	font-family: var(--font-primary);
+	font-size: 1.4rem;
+	line-height: 1.39;
+	color: var(--color-text);
+}

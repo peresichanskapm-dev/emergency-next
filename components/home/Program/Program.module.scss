@@ -1,0 +1,223 @@
+@use "../../../app/styles/mixins" as m;
+
+/* "Програма" — dark section, timetable with alternating light/dark rows.
+   Figma (1440): heading 24/110 ≈ y4448; rows content x137→1325, light bands
+   x113→1327; columns time(~205) · title+sub(1fr) · divider · speaker(right);
+   ОБІД divider row; outline button; torn white edge to the next section. */
+
+.program {
+	@include m.dark-grain;
+	padding: 10rem 0;
+
+	@media (min-width: 992px) {
+		padding: 12rem 0;
+	}
+}
+
+.inner {
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.heading {
+	font-family: var(--font-primary);
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.8rem;
+	line-height: 1.1;
+	letter-spacing: 0.15em;
+	color: #fff;
+
+	@media (min-width: 992px) {
+		font-size: 2.4rem;
+	}
+}
+
+/* ---------- Timetable ---------- */
+.list {
+	list-style: none;
+	margin: 4rem 0 0;
+	padding: 0;
+	/* mobile: light bands bleed to the screen edges (cancel .inner's 2rem pad);
+	   .row keeps 2rem side padding so the text stays inset */
+	margin-inline: -2rem;
+
+	@media (min-width: 992px) {
+		margin: 6rem 0 0;
+	}
+}
+
+.row {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0;
+	padding: 3.2rem 2rem;
+	color: #fff;
+
+	/* alternating light bands (2nd, 4th, …) */
+	&:nth-child(even) {
+		background-color: var(--color-light);
+		color: var(--color-text);
+	}
+
+	@media (min-width: 992px) {
+		grid-template-columns: 20.5rem 1fr 29.5rem;
+		align-items: center;
+		padding: 3rem 1.5rem 3rem 3.6rem;
+
+		&:nth-child(even) {
+			padding-top: 4.4rem;
+			padding-bottom: 4.4rem;
+		}
+	}
+}
+
+.time {
+	font-family: var(--font-typewriter);
+	font-size: 1.6rem;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+	/* mobile mockup: time is its own row with a divider line under it */
+	padding-bottom: 1.6rem;
+	margin-bottom: 2.4rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+	.row:nth-child(even) & {
+		border-bottom-color: rgba(33, 31, 32, 0.15);
+	}
+
+	@media (min-width: 992px) {
+		font-size: 1.7rem;
+		padding-bottom: 0;
+		margin-bottom: 0;
+		border-bottom: none;
+
+		.row:nth-child(even) & {
+			border-bottom: none;
+		}
+	}
+}
+
+.title {
+	margin: 0;
+	font-family: var(--font-typewriter);
+	font-weight: 400;
+	font-size: 2rem;
+	line-height: 1.15;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+
+	@media (min-width: 768px) {
+		font-size: 2.2rem;
+	}
+}
+
+.sub {
+	margin: 1.2rem 0 0;
+	font-family: var(--font-typewriter);
+	font-size: 1.4rem;
+	line-height: 1.25;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.55);
+
+	.row:nth-child(even) & {
+		color: rgba(33, 31, 32, 0.55);
+	}
+
+	@media (min-width: 992px) {
+		font-size: 1.5rem;
+	}
+}
+
+/* Right column with the vertical divider on its left edge */
+.speaker {
+	font-family: var(--font-typewriter);
+	font-size: 1.4rem;
+	letter-spacing: 0.02em;
+	color: inherit;
+	/* mobile mockup: speaker sits below a divider line */
+	margin-top: 2.4rem;
+	padding-top: 1.6rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+	.row:nth-child(even) & {
+		border-top-color: rgba(33, 31, 32, 0.15);
+	}
+
+	@media (min-width: 992px) {
+		margin-top: 0;
+		padding-top: 0;
+		border-top: none;
+		align-self: stretch;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding-left: 3rem;
+		font-size: 1.5rem;
+		text-align: right;
+		border-left: 1px solid rgba(255, 255, 255, 0.25);
+
+		.row:nth-child(even) & {
+			border-left-color: rgba(33, 31, 32, 0.2);
+		}
+	}
+}
+
+/* ---------- ОБІД divider row ---------- */
+.lunch {
+	margin-top: 0.4rem;
+	padding: 2.8rem 0;
+	text-align: center;
+	font-family: var(--font-typewriter);
+	font-size: 1.8rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #fff;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+	@media (min-width: 992px) {
+		font-size: 2rem;
+	}
+}
+
+/* ---------- Button ---------- */
+.actions {
+	margin-top: 4rem;
+	text-align: center;
+
+	@media (min-width: 992px) {
+		margin-top: 5rem;
+	}
+}
+
+.moreBtn {
+	appearance: none;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.8rem 4rem;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	color: #fff;
+	font-family: var(--font-primary);
+	font-weight: 600;
+	font-size: 1.5rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	transition: background-color 0.2s ease, color 0.2s ease;
+
+	&:hover {
+		background-color: #fff;
+		color: var(--color-black);
+	}
+
+	@media (min-width: 992px) {
+		padding: 2.2rem 5rem;
+		font-size: 1.6rem;
+	}
+}
