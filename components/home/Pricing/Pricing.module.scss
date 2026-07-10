@@ -8,7 +8,7 @@
 	padding: 6rem 0 9rem;
 
 	@media (min-width: 992px) {
-		padding: 7rem 0 12rem;
+		padding: 7rem 0 0rem;
 	}
 }
 
@@ -76,6 +76,7 @@
 
 	@media (min-width: 992px) {
 		min-height: 24rem; /* Figma H240 */
+		border-radius: 3rem; /* Figma: 30px */
 		padding: 5rem 4.5rem;
 	}
 }
@@ -104,10 +105,10 @@
 	text-transform: uppercase;
 
 	@media (min-width: 768px) {
-		font-size: 4.6rem;
+		font-size: 6rem;
 	}
 	@media (min-width: 992px) {
-		font-size: 5.4rem;
+		font-size: 7.77rem; /* Figma: 77.673px */
 	}
 }
 
@@ -129,12 +130,12 @@
 
 .cardNote {
 	margin: 0;
-	max-width: 16rem;
+	max-width: 17rem;
 	text-align: left;
 
 	@media (min-width: 576px) {
-		max-width: 19rem;
-		text-align: right;
+		max-width: 17rem;
+		text-align: left;
 	}
 	font-family: var(--font-typewriter);
 	font-size: 1.4rem;
@@ -143,19 +144,14 @@
 	text-transform: uppercase;
 }
 
-/* Rotated outline price stamp */
+/* Price stamp — SVG (frame + text + tilt baked in) */
 .price {
-	padding: 1rem 1.8rem;
-	border: 2px solid currentColor;
-	font-family: var(--font-typewriter);
-	font-size: 1.8rem;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
-	white-space: nowrap;
-	transform: rotate(-4deg);
+	display: block;
+	width: 14rem;
+	height: auto;
 
 	@media (min-width: 992px) {
-		font-size: 2.2rem;
+		width: 16.8rem; /* ≈ native 168px */
 	}
 }
 
@@ -163,11 +159,12 @@
 .cardEarly {
 	z-index: 1;
 	background-color: #861a23;
-	color: #fff;
+	color: #eeeef1; /* Figma: #EEEEF1 */
 
+	/* Figma: folder tab is the same red as the card body */
 	.tab {
-		background-color: #6f1520;
-		color: #fff;
+		background-color: #861a23;
+		color: #eeeef1;
 	}
 }
 
@@ -175,11 +172,12 @@
 .cardLazy {
 	z-index: 2;
 	margin-top: -2rem;
-	background-color: #f4f2f2;
+	/* Figma: near-white #F7F7F8 with a subtle darkening toward the bottom */
+	background: linear-gradient(180deg, #f7f7f8 0%, #ededee 100%);
 	color: var(--color-text);
 
 	.tab {
-		background-color: #f4f2f2;
+		background-color: #f7f7f8;
 		color: var(--color-text);
 	}
 }
@@ -233,6 +231,12 @@
 .buyBtn {
 	appearance: none;
 	cursor: pointer;
+	/* inline-flex so vertical margin/padding actually affect flow
+	   (a bare <a> is inline → margin-top ignored, padding overlaps the list) */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
 	margin-top: 3.2rem;
 	/* mobile mockup: compact black button, left-aligned */
 	padding: 1.6rem 3.6rem;
@@ -252,6 +256,7 @@
 	}
 
 	@media (min-width: 992px) {
+		margin-top: 6rem; /* Figma: більший відступ від списку до кнопки */
 		padding: 1.8rem 5rem;
 		font-size: 1.6rem;
 	}

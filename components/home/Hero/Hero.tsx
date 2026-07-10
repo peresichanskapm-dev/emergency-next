@@ -49,7 +49,12 @@ export default function Hero() {
             передбачити, але до яких необхідно бути готовим.
           </p>
 
-          <a href="#register" className={s.cta}>
+          <a
+            href="https://secure.wayforpay.com/button/b6616e6752d4e"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={s.cta}
+          >
             Зареєструватися
           </a>
         </div>

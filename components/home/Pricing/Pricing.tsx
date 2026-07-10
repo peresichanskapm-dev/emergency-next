@@ -19,10 +19,17 @@ export default function Pricing() {
           <div className={s.cards}>
             {/* Early Owl — red tier */}
             <article className={`${s.card} ${s.cardEarly}`}>
-              <span className={s.tab}>01/07 — 27/08</span>
+              <span className={s.tab}>01/07 – 27/08</span>
               <h3 className={s.cardTitle}>Early Owl</h3>
               <div className={s.cardAside}>
-                <span className={s.price}>8 000 грн</span>
+                <Image
+                  src="/img/pricing/price-early.svg"
+                  alt="8 000 грн"
+                  width={168}
+                  height={55}
+                  unoptimized
+                  className={s.price}
+                />
                 <p className={s.cardNote}>
                   Спеціальна вартість для перших учасників
                 </p>
@@ -31,10 +38,17 @@ export default function Pricing() {
 
             {/* Lazy Owl — standard tier */}
             <article className={`${s.card} ${s.cardLazy}`}>
-              <span className={s.tab}>27/08 — 11/09</span>
+              <span className={s.tab}>27/08 – 11/09</span>
               <h3 className={s.cardTitle}>Lazy Owl</h3>
               <div className={s.cardAside}>
-                <span className={s.price}>10 000 грн</span>
+                <Image
+                  src="/img/pricing/price-lazy.svg"
+                  alt="10 000 грн"
+                  width={185}
+                  height={56}
+                  unoptimized
+                  className={s.price}
+                />
               </div>
             </article>
           </div>
@@ -56,9 +70,14 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <button type="button" className={s.buyBtn}>
+            <a
+              href="https://secure.wayforpay.com/button/b6616e6752d4e"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={s.buyBtn}
+            >
               Придбати
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
   overflow: hidden;
 
   @media (min-width: 992px) {
-    padding: 12rem 0;
+    padding: 0rem 0;
   }
 
   /* Текстура зліва (газетний край) */
@@ -60,7 +60,7 @@
 }
 
 .certificateImg {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   /* Якщо нахил не закладений у самому PNG, розкоментуй рядок нижче: */
   /* transform: rotate(-5deg); */
@@ -96,7 +96,8 @@
   font-weight: 600; /* Напівжирний шрифт для першого абзацу */
   font-size: 1.6rem;
   line-height: 1.4;
-  color: var(--color-text, #211f20);
+  /* Figma: увесь перший абзац — акцентний червоний */
+  color: var(--color-red);
   margin-bottom: 2.4rem;
 
   @media (min-width: 992px) {

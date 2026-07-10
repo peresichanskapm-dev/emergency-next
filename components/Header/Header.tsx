@@ -10,6 +10,8 @@ const NAV_LINKS = [
   { label: "Спікери", href: "#speakers" },
 ];
 
+const REGISTER_URL = "https://secure.wayforpay.com/button/b6616e6752d4e";
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -23,7 +25,7 @@ export default function Header() {
           aria-label="emergency+ — протоколи терапії ускладнень"
         >
           <Image
-            src="/img/header/logo.png"
+            src="/img/header/logo.svg"
             alt="emergency+"
             width={261}
             height={50}
@@ -40,7 +42,12 @@ export default function Header() {
           ))}
         </nav>
 
-        <a href="#register" className={s.cta}>
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={s.cta}
+        >
           Зареєструватися
         </a>
 
@@ -69,7 +76,13 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-          <a href="#register" className={s.mobileCta} onClick={close}>
+          <a
+            href={REGISTER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={s.mobileCta}
+            onClick={close}
+          >
             Зареєструватися
           </a>
         </div>

@@ -50,7 +50,6 @@
 .text {
     font-size: 1.4rem;
     color: #ffffffcc; /* Замість rgba */
-    margin-bottom: 0.8rem;
 }
 
 .link {
@@ -59,7 +58,7 @@
     color: #fff;
     text-decoration: none;
     font-weight: 500;
-    margin-bottom: 0.4rem;
+    margin-top: 1rem;
     transition: color 0.3s ease;
 
     &:hover {
@@ -92,7 +91,6 @@
 .socials {
     display: flex;
     gap: 1.2rem;
-    margin-top: 1.6rem;
     justify-content: center;
 
     @media (min-width: 992px) {
@@ -104,14 +102,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 1.2rem; /* Закруглений квадрат */
     background-color: #2a2a2a; /* Темно-сірий колір фону */
     transition: background-color 0.3s ease, transform 0.2s ease;
 
     img {
         transition: filter 0.3s ease;
+        width: 3rem;
+        height: 3rem;
     }
 
     &:hover {
@@ -189,40 +189,16 @@
     }
 }
 
-.copyright {
+.copyright,
+.credit {
+    margin: 0;
     font-size: 1.3rem;
     color: #ffffff66;
     line-height: 1.6;
-
-    p {
-        margin: 0;
-    }
 }
 
-.placeholders {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
+.credit {
     @media (min-width: 768px) {
-        flex-direction: row;
-        gap: 4rem;
         text-align: right;
     }
-}
-
-.placeholderItem {
-    display: flex;
-    flex-direction: column;
-}
-
-.placeholderPhone {
-    font-size: 1.4rem;
-    color: #fff;
-    margin-bottom: 0.4rem;
-}
-
-.placeholderName {
-    font-size: 1.3rem;
-    color: #ffffff99;
 }
