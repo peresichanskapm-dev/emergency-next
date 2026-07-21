@@ -82,6 +82,19 @@
   gap: 1.6rem;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fieldError {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: var(--color-red);
+}
+
 .input {
   width: 100%;
   background-color: transparent;
@@ -121,4 +134,23 @@
   &:hover {
     background-color: #fff;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.statusMessage {
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.errorMessage {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--color-red);
 }
