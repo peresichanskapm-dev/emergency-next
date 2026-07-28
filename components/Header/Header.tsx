@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { label: "Спікери", href: "#speakers" },
 ];
 
-const REGISTER_URL = "https://secure.wayforpay.com/button/b6616e6752d4e";
+const REGISTER_URL = "https://secure.wayforpay.com/button/b80f677e3ef75";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
