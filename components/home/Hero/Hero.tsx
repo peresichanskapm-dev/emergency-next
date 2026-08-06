@@ -31,6 +31,15 @@ export default function Hero() {
               priority
               className={s.hand}
             />
+
+            {/* БПР badge — mobile placement */}
+            <Image
+              src="/img/hero/badge-mobile.svg"
+              alt="15 балів БПР"
+              width={155}
+              height={80}
+              className={s.badgeMobile}
+            />
           </div>
         </div>
 
@@ -49,14 +58,25 @@ export default function Hero() {
             передбачити, але до яких необхідно бути готовим.
           </p>
 
-          <a
-            href="https://secure.wayforpay.com/button/b80f677e3ef75"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={s.cta}
-          >
-            Зареєструватися
-          </a>
+          <div className={s.actions}>
+            <a
+              href="https://secure.wayforpay.com/button/b80f677e3ef75"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={s.cta}
+            >
+              Зареєструватися
+            </a>
+
+            {/* БПР badge — desktop placement */}
+            <Image
+              src="/img/hero/badge-desktop.svg"
+              alt="15 балів БПР"
+              width={245}
+              height={94}
+              className={s.badgeDesktop}
+            />
+          </div>
         </div>
       </div>
     </section>
