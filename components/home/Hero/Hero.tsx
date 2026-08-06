@@ -34,7 +34,7 @@ export default function Hero() {
 
             {/* БПР badge — mobile placement */}
             <Image
-              src="/img/hero/badge-mobile.svg"
+              src="/img/hero/bpr-badge-stacked.svg"
               alt="15 балів БПР"
               width={155}
               height={80}
@@ -70,7 +70,7 @@ export default function Hero() {
 
             {/* БПР badge — desktop placement */}
             <Image
-              src="/img/hero/badge-desktop.svg"
+              src="/img/hero/bpr-badge-wide.svg"
               alt="15 балів БПР"
               width={245}
               height={94}
