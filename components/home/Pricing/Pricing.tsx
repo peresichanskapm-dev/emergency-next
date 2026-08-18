@@ -71,7 +71,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://secure.wayforpay.com/page?vkh=6a8318f3-c8fc-4cbb-9d88-1b5e22d1dba8"
+              href="https://secure.wayforpay.com/button/b6616e6752d4e"
               target="_blank"
               rel="noopener noreferrer"
               className={s.buyBtn}
