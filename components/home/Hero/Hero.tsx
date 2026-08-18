@@ -60,7 +60,7 @@ export default function Hero() {
 
           <div className={s.actions}>
             <a
-              href="https://secure.wayforpay.com/button/b80f677e3ef75"
+              href="https://secure.wayforpay.com/page?vkh=6a8318f3-c8fc-4cbb-9d88-1b5e22d1dba8"
               target="_blank"
               rel="noopener noreferrer"
               className={s.cta}
