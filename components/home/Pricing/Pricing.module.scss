@@ -123,6 +123,18 @@
 	}
 }
 
+/* Special card: the countdown takes the price slot, the price stamp moves up
+   above it. Cross-axis centering keeps the clock centred under the stamp. */
+.cardAsideSpecial {
+	flex-direction: column;
+	align-items: center;
+	gap: 1.6rem;
+
+	@media (min-width: 992px) {
+		gap: 2.2rem;
+	}
+}
+
 /* Price stamp — bordered box, border/text pick up the card's color */
 .price {
 	display: inline-flex;

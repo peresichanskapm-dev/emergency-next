@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Countdown from "@/components/Countdown/Countdown";
 import s from "./Pricing.module.scss";
 
 const PACKAGE = [
@@ -21,8 +22,9 @@ export default function Pricing() {
             <article className={`${s.card} ${s.cardSpecial}`}>
               <span className={s.tab}>03.09 – 07.09</span>
               <h3 className={s.cardTitle}>Special price</h3>
-              <div className={s.cardAside}>
+              <div className={`${s.cardAside} ${s.cardAsideSpecial}`}>
                 <span className={s.price}>9 999 грн</span>
+                <Countdown size="sm" />
               </div>
             </article>
 
