@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero/Hero";
+import Promo from "@/components/home/Promo/Promo";
 import Stats from "@/components/home/Stats/Stats";
 import About from "@/components/home/About/About";
 import WhyAttend from "@/components/home/WhyAttend/WhyAttend";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Promo />
       <Stats />
       <About />
       <WhyAttend />

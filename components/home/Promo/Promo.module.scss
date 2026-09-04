@@ -1,0 +1,193 @@
+.promo {
+	position: relative;
+	overflow: hidden;
+	background-color: var(--color-bg);
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 42%;
+		background-image: url("/img/hero/newspaper.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+		mix-blend-mode: multiply;
+		opacity: 0.25;
+		pointer-events: none;
+	}
+
+	&::before {
+		left: 0;
+		background-position: left center;
+		-webkit-mask-image: linear-gradient(to right, #000 40%, transparent);
+		mask-image: linear-gradient(to right, #000 40%, transparent);
+	}
+
+	&::after {
+		right: 0;
+		background-position: right center;
+		-webkit-mask-image: linear-gradient(to left, #000 40%, transparent);
+		mask-image: linear-gradient(to left, #000 40%, transparent);
+	}
+}
+
+.inner {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.6rem;
+	max-width: 128rem;
+	margin: 0 auto;
+	padding: 2.4rem 2rem;
+	text-align: center;
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+		justify-content: center;
+		gap: 4rem;
+		padding: 3rem 2rem;
+		text-align: left;
+	}
+}
+
+.text {
+	font-family: var(--font-typewriter);
+	font-size: 1.8rem;
+	line-height: 1.19;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--color-text);
+
+	@media (min-width: 768px) {
+		font-size: 2.2rem;
+	}
+	@media (min-width: 992px) {
+		font-size: 3rem;
+	}
+}
+
+.price {
+	color: var(--color-red);
+}
+
+/* ---------- 7-segment digital clock ----------
+   Each segment is a clip-path hexagon, on/off state toggled via the --act
+   custom property. */
+
+.countdown {
+	--dh: 3.6rem; /* digit height — every other size derives from this */
+	--dw: calc(var(--dh) * 0.5);
+
+	display: flex;
+	align-items: center;
+	gap: calc(var(--dh) * 0.14);
+
+	@media (min-width: 768px) {
+		--dh: 4.6rem;
+	}
+	@media (min-width: 992px) {
+		--dh: 5.8rem;
+	}
+}
+
+.pair {
+	display: flex;
+	gap: calc(var(--dw) * 0.16);
+}
+
+.digit {
+	position: relative;
+	width: var(--dw);
+	height: var(--dh);
+	color: var(--color-red);
+}
+
+.seg {
+	--act: 0;
+
+	position: absolute;
+	background-color: currentColor;
+	opacity: var(--act);
+	transition: opacity 0.3s cubic-bezier(0.17, 0.67, 0.5, 1.15);
+
+	&.on {
+		--act: 1;
+	}
+}
+
+/* top / bottom / middle horizontal bars */
+.endTop,
+.endBottom,
+.middle {
+	left: 0;
+	width: 100%;
+	height: 10%;
+	clip-path: polygon(15% 0%, 7.5% 20%, 25% 100%, 75% 100%, 92.5% 20%, 85% 0%);
+}
+
+.endTop {
+	top: 0;
+}
+
+.endBottom {
+	bottom: 0;
+	transform: scaleY(-1);
+}
+
+.middle {
+	top: 45%;
+	clip-path: polygon(22.5% 0%, 6.5% 50%, 22.5% 100%, 77.5% 100%, 93.5% 50%, 77.5% 0%);
+}
+
+/* the four vertical bars, mirrored via transform instead of a second clip-path */
+.sideLeftTop,
+.sideLeftBottom,
+.sideRightTop,
+.sideRightBottom {
+	width: 20%;
+	height: 50%;
+	clip-path: polygon(0% 15%, 20% 7.5%, 100% 22.5%, 100% 85%, 20% 95%, 0% 90%);
+}
+
+.sideLeftTop {
+	top: 0;
+	left: 0;
+}
+
+.sideLeftBottom {
+	bottom: 0;
+	left: 0;
+	transform: scaleY(-1);
+}
+
+.sideRightTop {
+	top: 0;
+	right: 0;
+	transform: scaleX(-1);
+}
+
+.sideRightBottom {
+	bottom: 0;
+	right: 0;
+	transform: scale(-1, -1);
+}
+
+.colon {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	height: var(--dh);
+}
+
+.colonDot {
+	width: calc(var(--dh) * 0.12);
+	height: calc(var(--dh) * 0.12);
+	border-radius: 50%;
+	background-color: var(--color-red);
+}

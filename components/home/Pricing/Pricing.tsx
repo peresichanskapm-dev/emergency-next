@@ -17,22 +17,12 @@ export default function Pricing() {
 
         <div className={s.layout}>
           <div className={s.cards}>
-            {/* Early Owl — red tier */}
-            <article className={`${s.card} ${s.cardEarly}`}>
-              <span className={s.tab}>01/07 – 27/08</span>
-              <h3 className={s.cardTitle}>Early Owl</h3>
+            {/* Special price — red tier */}
+            <article className={`${s.card} ${s.cardSpecial}`}>
+              <span className={s.tab}>03.09 – 07.09</span>
+              <h3 className={s.cardTitle}>Special price</h3>
               <div className={s.cardAside}>
-                <Image
-                  src="/img/pricing/price-early.svg"
-                  alt="8 000 грн"
-                  width={168}
-                  height={55}
-                  unoptimized
-                  className={s.price}
-                />
-                <p className={s.cardNote}>
-                  Спеціальна вартість для перших учасників
-                </p>
+                <span className={s.price}>9 999 грн</span>
               </div>
             </article>
 
@@ -41,14 +31,7 @@ export default function Pricing() {
               <span className={s.tab}>27/08 – 11/09</span>
               <h3 className={s.cardTitle}>Lazy Owl</h3>
               <div className={s.cardAside}>
-                <Image
-                  src="/img/pricing/price-lazy.svg"
-                  alt="10 000 грн"
-                  width={185}
-                  height={56}
-                  unoptimized
-                  className={s.price}
-                />
+                <span className={s.price}>15 000 грн</span>
               </div>
             </article>
           </div>
